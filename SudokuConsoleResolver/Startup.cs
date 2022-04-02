@@ -1,6 +1,7 @@
 ﻿namespace SudokuConsoleResolver
 {
     using System;
+    using System.Collections.Generic;
     using static Helpers;
 
     class StartUp
@@ -20,19 +21,39 @@
                 { 0, 0, 7, 0, 4, 0, 2, 0, 3}
             };
 
-            Console.WriteLine("Starting board!");
-            printBoard(board);
-            Console.WriteLine();
+            int[,] board2 = new int[,]
+            {
+                { 0, 2, 1, 6, 0, 0, 0, 9, 0},
+                { 8, 0, 0, 0, 0, 0, 0, 0, 0},
+                { 0, 0, 0, 0, 0, 5, 4, 0, 0},
+                { 0, 3, 8, 0, 0, 6, 0, 0, 5},
+                { 7, 0, 0, 0, 0, 0, 0, 3, 0},
+                { 9, 0, 0, 8, 0, 0, 0, 0, 0},
+                { 0, 0, 0, 0, 2, 0, 0, 0, 9},
+                { 0, 7, 0, 0, 0, 0, 0, 0, 0},
+                { 0, 6, 3, 1, 0, 0, 0, 2, 0}
+            };
 
-            if (solveBoard(board))
+            List<int[,]> boardsToSolve = new();
+            boardsToSolve.Add(board);
+            boardsToSolve.Add(board2);
+
+            foreach (var currentBoard in boardsToSolve)
             {
-                Console.WriteLine("Solved successfully!");
+                Console.WriteLine("Starting board!");
+                printBoard(currentBoard);
                 Console.WriteLine();
-                printBoard(board);
-            }
-            else
-            {
-                Console.WriteLine("Unsolvable board :(");
+
+                if (solveBoard(currentBoard))
+                {
+                    Console.WriteLine("Solved successfully!");
+                    Console.WriteLine();
+                    printBoard(currentBoard);
+                }
+                else
+                {
+                    Console.WriteLine("Unsolvable board :(");
+                }
             }
         }
     }
