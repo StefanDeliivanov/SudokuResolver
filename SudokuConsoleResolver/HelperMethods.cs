@@ -2,22 +2,11 @@
 {
     using System;
     using System.Threading;
+    using static DataConstants;
 
-    public static class Helpers
+    public static class HelperMethods
     {
-        public static readonly int gridSize = 9;
-        public static readonly char emptySpace = ' ';
-        public static readonly char dash = '-';
-        public static readonly char verticalBar = '|';
-
-        public static readonly string defaultSpace = new string(emptySpace, 2);
-        public static readonly string rowDelimiter = emptySpace + new string(dash, 35);
-        public static readonly string columnDelimiter = defaultSpace + verticalBar + defaultSpace;
-        public static readonly string startColumnDelimiter = verticalBar.ToString();
-        public static readonly string endColumnDelimiter = defaultSpace + verticalBar;
-        public static readonly string numbersDelimiter = defaultSpace;
-
-        public static bool isNumberInRow(int[,] board, int number, int row)
+        public static bool IsNumberInRowValid(int[,] board, int number, int row)
         {
             for (int i = 0; i < gridSize; i++)
             {
@@ -29,7 +18,7 @@
             return false;
         }
 
-        public static bool isNumberInColumn(int[,] board, int number, int column)
+        public static bool IsNumberInColumnValid(int[,] board, int number, int column)
         {
             for (int i = 0; i < gridSize; i++)
             {
@@ -41,7 +30,7 @@
             return false;
         }
 
-        public static bool isNumberInBox(int[,] board, int number, int row, int column)
+        public static bool IsNumberInBoxValid(int[,] board, int number, int row, int column)
         {
             int currentBoxRow = row - row % 3;
             int currentBoxColumn = column - column % 3;
@@ -59,12 +48,12 @@
             return false;
         }
 
-        public static bool isValidPlacement(int[,] board, int number, int row, int column)
-            => !isNumberInRow(board, number, row)
-            && !isNumberInColumn(board, number, column)
-            && !isNumberInBox(board, number, row, column);
+        public static bool IsValidPlacement(int[,] board, int number, int row, int column)
+            => !IsNumberInRowValid(board, number, row)
+            && !IsNumberInColumnValid(board, number, column)
+            && !IsNumberInBoxValid(board, number, row, column);
 
-        public static void printBoard(int[,] board)
+        public static void PrintBoard(int[,] board, int milliSecondsDelay = 0)
         {
             for (int row = 0; row < gridSize; row++)
             {
@@ -85,8 +74,12 @@
                     {
                         Console.Write(numbersDelimiter);
                     }
-                    Thread.Sleep(50);
-                    Console.Write(board[row, column]);
+                    Thread.Sleep(milliSecondsDelay);
+                    if(board[row, column] == 0)
+                    {
+                        Console.Write('X');
+                    }
+                    else Console.Write(board[row, column]);
                 }
                 Console.Write(endColumnDelimiter);
                 Console.WriteLine();
@@ -105,7 +98,7 @@
                     {
                         for (int numberToTry = 1; numberToTry <= gridSize; numberToTry++)
                         {
-                            if (isValidPlacement(board, numberToTry, row, column))
+                            if (IsValidPlacement(board, numberToTry, row, column))
                             {
                                 board[row, column] = numberToTry;
 
