@@ -1,4 +1,4 @@
-﻿namespace SudokuConsoleResolver
+﻿namespace SudokuResolver.BusinessLogic
 {
     using System;
     using System.Threading;
@@ -75,7 +75,7 @@
                         Console.Write(numbersDelimiter);
                     }
                     Thread.Sleep(milliSecondsDelay);
-                    if(board[row, column] == 0)
+                    if (board[row, column] == 0)
                     {
                         Console.Write('X');
                     }

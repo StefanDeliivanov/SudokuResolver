@@ -1,8 +1,8 @@
-﻿namespace SudokuConsoleResolver
+﻿namespace SudokuResolver.BusinessLogic
 {
     using System.Collections.Generic;
 
-    public class BoardsCollection
+    public class BoardsTemplateCollection
     {
         private List<int[,]> collectionList = new();
 

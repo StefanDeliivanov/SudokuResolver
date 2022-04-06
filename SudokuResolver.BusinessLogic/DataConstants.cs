@@ -1,4 +1,4 @@
-﻿namespace SudokuConsoleResolver
+﻿namespace SudokuResolver.BusinessLogic
 {
     public static class DataConstants
     {
