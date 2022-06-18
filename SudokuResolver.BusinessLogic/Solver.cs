@@ -1,37 +1,86 @@
 ﻿namespace SudokuResolver.BusinessLogic
 {
-    using System;
-    using System.Collections.Generic;
-    using static HelperMethods;
+    using SudokuResolver.Abstractions;
+    using static SudokuResolver.BusinessLogic.DataConstants;
 
-    public class Solver
+    public class Solver : ISolver
     {
-        public readonly List<int[,]> boardsToSolve;
-
-        public Solver(List<int[,]> boardsToSolve)
+        private static bool IsNumberInRowValid(int[,] board, int number, int row)
         {
-            this.boardsToSolve = boardsToSolve;
-        }
-
-        public void Solve()
-        {
-            foreach (var currentBoard in this.boardsToSolve)
+            for (int i = 0; i < gridSize; i++)
             {
-                Console.WriteLine("Starting board!");
-                PrintBoard(currentBoard);
-                Console.WriteLine();
-
-                if (solveBoard(currentBoard))
+                if (board[row, i] == number)
                 {
-                    Console.WriteLine("Solved successfully!");
-                    Console.WriteLine();
-                    PrintBoard(currentBoard, 50);
-                }
-                else
-                {
-                    Console.WriteLine("Unsolvable board :(");
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private static bool IsNumberInColumnValid(int[,] board, int number, int column)
+        {
+            for (int i = 0; i < gridSize; i++)
+            {
+                if (board[i, column] == number)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool IsNumberInBoxValid(int[,] board, int number, int row, int column)
+        {
+            int currentBoxRow = row - row % 3;
+            int currentBoxColumn = column - column % 3;
+
+            for (int i = currentBoxRow; i < currentBoxRow + 3; i++)
+            {
+                for (int j = currentBoxColumn; j < currentBoxColumn + 3; j++)
+                {
+                    if (board[i, j] == number)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private static bool IsValidPlacement(int[,] board, int number, int row, int column)
+            => !IsNumberInRowValid(board, number, row)
+            && !IsNumberInColumnValid(board, number, column)
+            && !IsNumberInBoxValid(board, number, row, column);
+
+        public bool SolveBoard(int[,] board)
+        {
+            for (int row = 0; row < gridSize; row++)
+            {
+                for (int column = 0; column < gridSize; column++)
+                {
+                    if (board[row, column] == 0)
+                    {
+                        for (int numberToTry = 1; numberToTry <= gridSize; numberToTry++)
+                        {
+                            if (IsValidPlacement(board, numberToTry, row, column))
+                            {
+                                board[row, column] = numberToTry;
+
+                                if (SolveBoard(board))
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    board[row, column] = 0;
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

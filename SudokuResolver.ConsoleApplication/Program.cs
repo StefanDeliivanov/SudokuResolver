@@ -6,11 +6,14 @@
     {
         static void Main(string[] args)
         {
-            var collection = new BoardsTemplateCollection();
+            var collection = new BoardTemplatesCollection();
             var boardsToSolve = collection.GetBoards();
+            var solver = new Solver();
 
-            var solver = new Solver(boardsToSolve);
-            solver.Solve();
+            foreach (var board in boardsToSolve)
+            {
+                solver.Solve(board);
+            }
         }
     }
 }

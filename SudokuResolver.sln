@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationLayer", "Presen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SudokuResolver.ConsoleApplication", "SudokuResolver.ConsoleApplication\SudokuResolver.ConsoleApplication.csproj", "{322A1E16-5042-4DB9-98AB-DA34B8DB534A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abstractions", "Abstractions", "{67F660DD-C43B-43DB-B918-EFE21D0AC08F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuResolver.Abstractions", "SudokuResolver.Abstractions\SudokuResolver.Abstractions.csproj", "{CE154C1D-5FEF-4B27-977C-909337311EF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{322A1E16-5042-4DB9-98AB-DA34B8DB534A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{322A1E16-5042-4DB9-98AB-DA34B8DB534A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{322A1E16-5042-4DB9-98AB-DA34B8DB534A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE154C1D-5FEF-4B27-977C-909337311EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE154C1D-5FEF-4B27-977C-909337311EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE154C1D-5FEF-4B27-977C-909337311EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE154C1D-5FEF-4B27-977C-909337311EF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C39D8FE4-1915-4DE8-A2B8-5A304A98E27C} = {CDBEF316-ECCC-4795-BFFE-ECAA90AB231C}
 		{322A1E16-5042-4DB9-98AB-DA34B8DB534A} = {DCC43C9A-1C54-4B8D-8C31-D0B0C642BD2C}
+		{CE154C1D-5FEF-4B27-977C-909337311EF6} = {67F660DD-C43B-43DB-B918-EFE21D0AC08F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC0CF048-582E-4094-B6B4-947B5DE996F8}
